@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mr-lphot.github.io/homeweb-aiyouxi-com-cn/sitemap.xml
