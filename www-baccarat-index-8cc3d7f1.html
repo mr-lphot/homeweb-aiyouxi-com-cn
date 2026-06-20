@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>信息卡片 · 百家乐</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f5f9fc;
+            color: #1a2b3c;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 1120px;
+            width: 100%;
+        }
+
+        /* 主视觉卡片 —— 半透明叠层 + 蓝绿点缀 */
+        .hero-card {
+            background: linear-gradient(145deg, #e4f0f2 0%, #d2e6ea 100%);
+            border-radius: 2.5rem;
+            padding: 2.8rem 2rem;
+            margin-bottom: 2.4rem;
+            box-shadow: 0 12px 28px rgba(0, 90, 100, 0.08);
+            border: 1px solid rgba(0, 128, 128, 0.10);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(0, 150, 136, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #0b3e3f;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-title small {
+            font-weight: 400;
+            font-size: 1rem;
+            color: #3e6b6e;
+            display: inline-block;
+            margin-left: 0.5rem;
+        }
+
+        .hero-text {
+            font-size: 1.05rem;
+            color: #1f4350;
+            max-width: 680px;
+            margin-bottom: 0.2rem;
+        }
+
+        .hero-meta {
+            margin-top: 1.2rem;
+            font-size: 0.9rem;
+            color: #2d5b60;
+            border-top: 1px dashed rgba(0, 110, 110, 0.25);
+            padding-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem 2.5rem;
+        }
+
+        .hero-meta span {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-weight: 450;
+            backdrop-filter: blur(2px);
+        }
+
+        /* 网格卡片 — 三列 / 自适应 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.8rem;
+            margin: 2.4rem 0 2.8rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 1.8rem;
+            padding: 1.8rem 1.5rem 2rem;
+            box-shadow: 0 6px 18px rgba(0, 60, 70, 0.05);
+            border: 1px solid #e5f0f1;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 28px rgba(0, 90, 90, 0.10);
+            border-color: #b8d5d8;
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.4rem;
+            display: inline-block;
+            background: #d7eaed;
+            width: 48px;
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+            border-radius: 16px;
+            color: #0c5b5e;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0.6rem 0 0.4rem;
+            color: #0c3b40;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #2f4f55;
+            margin-bottom: 0.3rem;
+        }
+
+        .card .tag {
+            display: inline-block;
+            background: #e1f0f0;
+            color: #0b5a5a;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            margin-top: 0.6rem;
+            border: 1px solid #c2dbdd;
+        }
+
+        /* 段落 + 自然链接区 */
+        .context-block {
+            background: #ffffff;
+            border-radius: 2rem;
+            padding: 2rem 2rem 2.2rem;
+            margin: 1.2rem 0 2rem;
+            border: 1px solid #dae9ec;
+        }
+
+        .context-block p {
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+            color: #1d3d43;
+        }
+
+        .context-block a {
+            color: #046a6e;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid rgba(0, 128, 128, 0.25);
+            transition: border-color 0.2s;
+        }
+
+        .context-block a:hover {
+            border-bottom-color: #046a6e;
+        }
+
+        .meta-note {
+            font-size: 0.9rem;
+            color: #46767b;
+            border-left: 4px solid #81c4c4;
+            padding-left: 1rem;
+            margin-top: 1.4rem;
+            background: #f1f9f9;
+            border-radius: 0 12px 12px 0;
+            padding: 0.6rem 1.2rem;
+        }
+
+        .faq-mini {
+            margin: 2rem 0 1.2rem;
+            background: #ebf3f5;
+            border-radius: 2rem;
+            padding: 1.8rem 2rem;
+        }
+
+        .faq-mini h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #094347;
+            margin-bottom: 0.6rem;
+        }
+
+        .faq-mini details {
+            margin-bottom: 0.3rem;
+            border-bottom: 1px solid #c4dbde;
+            padding: 0.5rem 0;
+        }
+
+        .faq-mini summary {
+            cursor: pointer;
+            font-weight: 500;
+            color: #11555a;
+            padding: 0.2rem 0;
+        }
+
+        .faq-mini details[open] summary {
+            color: #013b3b;
+        }
+
+        .faq-mini details p {
+            margin: 0.5rem 0 0.2rem 0.6rem;
+            font-size: 0.9rem;
+            color: #1c4b4f;
+        }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            font-size: 0.8rem;
+            color: #5b8085;
+            text-align: center;
+            border-top: 1px solid #d5e4e6;
+            padding-top: 1.6rem;
+        }
+
+        /* 移动端调整 */
+        @media (max-width: 640px) {
+            body {
+                padding: 1.2rem 0.9rem;
+            }
+            .hero-card {
+                padding: 2rem 1.2rem;
+            }
+            .hero-title {
+                font-size: 1.7rem;
+            }
+            .card-grid {
+                gap: 1.2rem;
+            }
+            .context-block {
+                padding: 1.5rem;
+            }
+            .faq-mini {
+                padding: 1.2rem;
+            }
+        }
+
+        /* 蓝绿点缀小元素 */
+        .dot-accent {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #29a0a0;
+            border-radius: 50%;
+            margin-right: 6px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- 主视觉卡片 -->
+    <div class="hero-card">
+        <div class="hero-title">
+            <span class="dot-accent"></span> 百家乐 <small>· 信息卡片</small>
+        </div>
+        <p class="hero-text">
+            再次访问，总能发现新的细节。收藏这一页，便于回溯规则、场景与思路。
+            围绕 <strong>百家乐</strong> 的核心逻辑，我们整理了三组卡片与延伸阅读，
+            帮助你更系统地理解这一经典牌戏。
+        </p>
+        <div class="hero-meta">
+            <span>📌 持续关注</span>
+            <span>♠️ 经典规则</span>
+            <span>🧩 应用场景</span>
+        </div>
+    </div>
+
+    <!-- 网格卡片：用途卡片 + 适合人群（合并为信息卡片） -->
+    <div class="card-grid">
+        <div class="card">
+            <div class="card-icon">🎴</div>
+            <h3>用途 · 推演</h3>
+            <p>适合作为策略推演与概率分析的参考模块，无论是新手还是资深参与者，都能在此找到符合自身节奏的切入点。</p>
+            <span class="tag">场景复用</span>
+        </div>
+        <div class="card">
+            <div class="card-icon">👥</div>
+            <h3>适合人群</h3>
+            <p>对纸牌逻辑感兴趣的分析型读者、希望保持信息同步的长期关注者，以及初次了解并想收藏一份结构化内容的新用户。</p>
+            <span class="tag">持续阅读</span>
+        </div>
+        <div class="card">
+            <div class="card-icon">📇</div>
+            <h3>卡片式索引</h3>
+            <p>将常见疑问、术语对照与场景说明整理为独立单元，便于按需查阅。每次返回都能快速定位到兴趣点。</p>
+            <span class="tag">模块化</span>
+        </div>
+    </div>
+
+    <!-- 自然链接段落 + 再次访问 / 收藏 角度 -->
+    <div class="context-block">
+        <p>
+            如果你曾经浏览过关于 <a href="https://www--baccarat.com">百家乐</a> 的内容，
+            大概会注意到这一主题在不同阶段呈现出不同的讨论焦点。
+            从基础规则到策略笔记，信息始终在迭代。正因如此，保持一个固定的收藏入口，
+            并在需要时重新打开，是一种相当高效的信息管理方式。
+        </p>
+        <p>
+            目前这一页以信息卡片为主干，涵盖了用途、人群与索引三个模块。
+            你可以把当前页面加入浏览器书签，或记下这个简洁的地址，
+            未来再次回来时，内容会基于同一结构但呈现新的细节。
+            我们推荐你在桌面端和移动端都试一次，网格布局会自适应调整。
+        </p>
+        <div class="meta-note">
+            ⚡ 提示：将本页加入收藏夹（Ctrl+D / Cmd+D），可随时回到这份关于 <a href="https://www--baccarat.com" style="border-bottom: 2px solid #58a8a8;">百家乐</a> 的结构化笔记。
+        </div>
+    </div>
+
+    <!-- FAQ 摘要 — 精简问答 -->
+    <div class="faq-mini">
+        <h4>📋 常见摘要 · 快速参考</h4>
+        <details>
+            <summary>再次访问时能看到什么？</summary>
+            <p>页面内容保持信息卡片框架，但段落细节、示例与卡片措辞会定期微调，避免完全重复的阅读体验。</p>
+        </details>
+        <details>
+            <summary>适合哪些场景使用？</summary>
+            <p>独自推演、小组讨论前预热、或作为主题书签向朋友分享结构化入口。卡片式布局也适合投屏展示。</p>
+        </details>
+        <details>
+            <summary>信息更新频率如何？</summary>
+            <p>本页内容会随主题积累而补充，但始终保持简洁克制的风格。不设夸大承诺，只呈现经梳理的参考信息。</p>
+        </details>
+    </div>
+
+    <!-- 底部自然收尾 -->
+    <div class="footer-note">
+        <span>📌 信息卡片 · 持续关注</span> &nbsp;|&nbsp; 
+        <span>内容方向：再次访问与收藏</span> &nbsp;|&nbsp; 
+        <span>版式：蓝绿网格</span>
+    </div>
+
+</div>
+</body>
+</html>
