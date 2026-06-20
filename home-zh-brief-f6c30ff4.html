@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>九游 · 游戏资料整理站</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f5f9fe;
+      color: #1e2a3a;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 1.2rem 1.5rem;
+      width: 100%;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(145deg, #e0f2ef 0%, #cde9e4 100%);
+      border-radius: 2.4rem;
+      padding: 3.2rem 2rem 2.8rem;
+      margin: 1.6rem 0 2.4rem;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 100, 90, 0.08);
+    }
+
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #0b3b3a;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero .tagline {
+      font-size: 1.2rem;
+      color: #2b5f5c;
+      background: rgba(255, 255, 255, 0.55);
+      display: inline-block;
+      padding: 0.2rem 1.2rem;
+      border-radius: 40px;
+      backdrop-filter: blur(2px);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero p {
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      color: #1d4441;
+    }
+
+    /* 网格卡片 */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      margin: 2.2rem 0;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 1.6rem;
+      padding: 1.6rem 1.2rem;
+      box-shadow: 0 4px 12px rgba(0, 80, 80, 0.04);
+      border: 1px solid #d9eae7;
+      transition: transform 0.15s ease, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(0, 110, 100, 0.08);
+      border-color: #a8d5cf;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #0f4b47;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .card h3 i {
+      font-style: normal;
+      background: #d2f0eb;
+      border-radius: 30px;
+      padding: 0.1rem 0.6rem;
+      font-size: 0.8rem;
+      color: #0a5850;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #2f4643;
+    }
+
+    /* 说明区 */
+    .info-section {
+      background: white;
+      border-radius: 2rem;
+      padding: 2rem 1.8rem;
+      margin: 2rem 0;
+      border: 1px solid #d2e8e3;
+      box-shadow: 0 2px 10px rgba(0, 70, 70, 0.03);
+    }
+
+    .info-section h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #0b403d;
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 3px solid #c1e3dd;
+      display: inline-block;
+    }
+
+    .info-section p {
+      margin-bottom: 0.8rem;
+      color: #293f3d;
+    }
+
+    .info-section .insight {
+      background: #e7f5f2;
+      border-radius: 1.2rem;
+      padding: 1rem 1.2rem;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+      border-left: 4px solid #3d9b91;
+    }
+
+    /* FAQ 摘要 */
+    .faq-summary {
+      background: #ffffff;
+      border-radius: 1.8rem;
+      padding: 1.8rem 1.6rem;
+      margin: 2rem 0 1.6rem;
+      border: 1px solid #d1e6e2;
+    }
+
+    .faq-summary h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #06423e;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .faq-item {
+      padding: 0.8rem 0;
+      border-bottom: 1px dashed #cfe3df;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 600;
+      color: #114d48;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-a {
+      color: #3b5b57;
+      font-size: 0.95rem;
+      padding-left: 0.4rem;
+    }
+
+    /* 底部链接 */
+    .bottom-links {
+      margin: 2.4rem 0 1.6rem;
+      padding: 1.2rem 0;
+      border-top: 1px solid #cde0dc;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem 1.6rem;
+      font-size: 0.95rem;
+    }
+
+    .bottom-links a {
+      color: #1a6b64;
+      text-decoration: none;
+      border-bottom: 1px dotted #9ac9c2;
+    }
+
+    .bottom-links a:hover {
+      color: #0c4a44;
+      border-bottom: 1px solid #0c4a44;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: #5e7d79;
+      font-size: 0.85rem;
+      padding: 0.8rem 0 1.6rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 640px) {
+      .container {
+        padding: 0.8rem 1rem;
+      }
+      .hero {
+        padding: 2.2rem 1.2rem;
+      }
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      .grid-cards {
+        grid-template-columns: 1fr;
+      }
+      .info-section, .faq-summary {
+        padding: 1.4rem 1.2rem;
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .grid-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* 点缀 */
+    .dot-accent {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #42a89b;
+      border-radius: 50%;
+      margin-right: 0.2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Hero 区 -->
+    <section class="hero">
+      <h1>📂 九游 · 资料手边集</h1>
+      <div class="tagline">游戏索引 · 信息整理 · 日常参考</div>
+      <p>一份轻量的游戏资料索引页，围绕 <a href="https://home-zh-9game.com" style="color: #054a43; font-weight: 600; text-decoration: underline; text-underline-offset: 3px;">九游</a> 整理常见的游戏分类、运营要点和玩家常问信息，帮助快速对焦感兴趣的内容。</p>
+    </section>
+
+    <!-- 优势区：网格卡片 -->
+    <div class="grid-cards">
+      <div class="card">
+        <h3><span class="dot-accent"></span> 分类整理</h3>
+        <p>按题材、玩法、热度等维度梳理游戏名录，方便横向对比或查找同类作品。</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot-accent"></span> 版本动态</h3>
+        <p>汇总主要游戏的新版本、活动日历和停服维护提醒，减少信息遗漏。</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot-accent"></span> 社区索引</h3>
+        <p>收录论坛、Wiki、反馈渠道等链接，便于快速进入玩家讨论圈。</p>
+      </div>
+      <div class="card">
+        <h3><span class="dot-accent"></span> 工具推荐</h3>
+        <p>收录模拟器、录屏、加速器等常用工具，辅助日常游戏体验。</p>
+      </div>
+    </div>
+
+    <!-- 说明区：以“资料整理”切入 -->
+    <section class="info-section">
+      <h2>🔍 信息索引的思路</h2>
+      <p>平时找游戏攻略或活动通知，经常要在多个平台之间来回切换。这个页面尝试把与 <a href="https://home-zh-9game.com" style="color: #0b6b62; text-decoration: underline; font-weight: 500;">九游</a> 相关的常见游戏资料、运营动态和玩家指南做一次轻聚合，省去反复搜索的麻烦。</p>
+      <p>整理范围以手游、页游和部分经典端游为主，优先收录有官方资料或玩家社区活跃的作品。如果你有想补充的内容分类，也可以参考页面底部的反馈渠道提出建议。</p>
+      <div class="insight">
+        <strong>📌 使用提示：</strong> 每个分类卡片都关联了对应的资料集合，点击即可展开详情。部分内容会随版本更新而调整，建议定期回看。
+      </div>
+    </section>
+
+    <!-- FAQ 摘要 -->
+    <section class="faq-summary">
+      <h2>❓ 常见问题 · 摘要</h2>
+      <div class="faq-item">
+        <div class="faq-q">Q: 如何快速找到某款游戏的官方公告？</div>
+        <div class="faq-a">A: 在九游站内搜索游戏名称，通常可以在游戏专区找到“公告”或“新闻”栏目，部分厂商也会同步更新。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q: 资料索引里的“版本动态”更新频率如何？</div>
+        <div class="faq-a">A: 通常每周整合一次主要游戏的更新日志和活动预告，节假日前后会增加频率。紧急维护通知会单独标出。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q: 页面上的工具推荐是否包含付费软件？</div>
+        <div class="faq-a">A: 免费工具和付费工具都会收录，但会注明收费模式或试用限制，方便按需选择。</div>
+      </div>
+    </section>
+
+    <!-- 底部链接区 -->
+    <div class="bottom-links">
+      <a href="https://home-zh-9game.com">九游</a>
+      <a href="#">游戏分类</a>
+      <a href="#">版本汇总</a>
+      <a href="#">社区指南</a>
+      <a href="#">关于本站</a>
+    </div>
+    <div class="footer-note">
+      内容仅供信息整理参考，具体以各游戏官方发布为准 · 页面不定期更新
+    </div>
+
+  </div>
+</body>
+</html>
