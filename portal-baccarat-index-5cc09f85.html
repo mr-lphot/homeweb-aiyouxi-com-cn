@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>重访 · 从容一隅</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(145deg, #f9e6d6 0%, #f3d9c2 35%, #ebc9aa 70%, #e2b992 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      line-height: 1.7;
+      color: #3d2c1f;
+    }
+
+    .card {
+      max-width: 780px;
+      width: 100%;
+      background: #fffbf7;
+      border-radius: 36px;
+      box-shadow: 0 20px 40px -12px rgba(100, 65, 40, 0.25), 0 8px 16px -6px rgba(0,0,0,0.05);
+      padding: 2.8rem 2.4rem;
+      transition: box-shadow 0.2s ease;
+    }
+
+    @media (max-width: 540px) {
+      body { padding: 1.2rem; }
+      .card { padding: 2rem 1.5rem; border-radius: 28px; }
+    }
+
+    .greeting-line {
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      color: #9f7b62;
+      margin-bottom: 0.4rem;
+      font-weight: 400;
+    }
+
+    h1 {
+      font-size: 2.1rem;
+      font-weight: 450;
+      letter-spacing: -0.01em;
+      color: #4d3522;
+      margin-bottom: 1.2rem;
+      line-height: 1.2;
+      border-left: 4px solid #d8b48c;
+      padding-left: 1rem;
+    }
+
+    .intro p {
+      margin-bottom: 1.3rem;
+      font-size: 1.02rem;
+    }
+
+    .intro p:last-of-type {
+      margin-bottom: 1.8rem;
+    }
+
+    .highlight-link {
+      color: #b0764a;
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .highlight-link:hover {
+      border-bottom: 1px solid #b0764a;
+      color: #8b5f3a;
+    }
+
+    .story-separator {
+      margin: 2rem 0 1.6rem;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #e2cdb8, transparent);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem 1.5rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    @media (max-width: 500px) {
+      .feature-grid { grid-template-columns: 1fr; }
+    }
+
+    .feature-item {
+      background: #f8efe8;
+      border-radius: 20px;
+      padding: 1.2rem 1.2rem 1.2rem 1.5rem;
+      transition: background 0.2s;
+    }
+
+    .feature-item:hover {
+      background: #f2e4d9;
+    }
+
+    .feature-item span {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #6b4f38;
+      margin-bottom: 0.2rem;
+      letter-spacing: 0.01em;
+    }
+
+    .feature-item p {
+      font-size: 0.95rem;
+      color: #4f3a29;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .gentle-cta {
+      background: #efe1d4;
+      border-radius: 48px;
+      padding: 1.1rem 1.8rem;
+      margin: 2rem 0 0.8rem;
+      text-align: center;
+      border: 1px solid #e2cbb8;
+    }
+
+    .gentle-cta p {
+      font-size: 1rem;
+      color: #3f2e1f;
+      margin: 0;
+    }
+
+    .gentle-cta a {
+      color: #402e1f;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1.5px dotted #b58b6c;
+      transition: border-bottom 0.2s, color 0.2s;
+    }
+
+    .gentle-cta a:hover {
+      border-bottom: 1.5px solid #402e1f;
+      color: #1f150f;
+    }
+
+    .faq-mini {
+      margin-top: 2.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid #e5d3c4;
+    }
+
+    .faq-mini details {
+      margin-bottom: 0.9rem;
+    }
+
+    .faq-mini summary {
+      font-weight: 450;
+      color: #553f2d;
+      cursor: pointer;
+      padding: 0.3rem 0;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .faq-mini summary::before {
+      content: "▸";
+      color: #b58b6c;
+      transition: transform 0.2s;
+      display: inline-block;
+    }
+
+    .faq-mini details[open] summary::before {
+      transform: rotate(90deg);
+    }
+
+    .faq-mini details p {
+      margin: 0.5rem 0 0.2rem 1.2rem;
+      font-size: 0.95rem;
+      color: #5a4636;
+      line-height: 1.6;
+    }
+
+    .footer-note {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #8e7866;
+      text-align: center;
+      border-top: 1px solid #e8d6c8;
+      padding-top: 1.4rem;
+    }
+
+    .footer-note a {
+      color: #7f644d;
+      text-decoration: none;
+      border-bottom: 1px dotted #bb9c84;
+    }
+
+    .footer-note a:hover {
+      border-bottom: 1px solid #7f644d;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="greeting-line">—— 又一次停留</div>
+    <h1>再次翻开的同一页</h1>
+
+    <div class="intro">
+      <p>
+        有些地方，你第一次去到是偶然。第二次、第三次，便成了习惯。每次推开同一扇门，光线、声音、氛围都在细微地变化——但你知道自己为何回来。
+      </p>
+      <p>
+        这里不是需要被“发现”的新大陆，而是一个你愿意反复落座、续杯、翻页的角落。<a href="https://portal--baccarat.com" class="highlight-link">百家乐</a>，这三个字对你而言，或许早已不是陌生的拼写，而是一种节奏、一种呼吸的间隔。收藏它，是因为你知道自己还会再来。
+      </p>
+    </div>
+
+    <div class="story-separator" role="separator"></div>
+
+    <div class="feature-grid">
+      <div class="feature-item">
+        <span>始终如一的入口</span>
+        <p>每次回来，界面依旧清晰克制。没有突然的弹窗，没有需要重新适应的布局。</p>
+      </div>
+      <div class="feature-item">
+        <span>不喧嚣的陪伴</span>
+        <p>在需要安静专注的时段，它不会用闪烁或推送打断你。你可以只是看着。</p>
+      </div>
+      <div class="feature-item">
+        <span>收藏夹里的位置</span>
+        <p>书签栏里放着，不是因为非看不可，而是因为知道它在，就安心。</p>
+      </div>
+      <div class="feature-item">
+        <span>节奏由你决定</span>
+        <p>不必赶时间。每次访问都是自己的步调，可以停留五分钟，也可以只是路过。</p>
+      </div>
+    </div>
+
+    <div class="gentle-cta">
+      <p>
+        如果你也习惯把某些页面留在手边，不妨将 <a href="https://portal--baccarat.com">百家乐</a> 放在一个随时能点到的地方。不为别的，只为下一次想回来时，不用费力寻找。
+      </p>
+    </div>
+
+    <div class="faq-mini">
+      <details>
+        <summary>为什么是“再次访问”而不是“新开始”？</summary>
+        <p>因为真正适合你的东西，通常不是一次性邂逅，而是在反复接触中慢慢确认的。收藏一个页面，就像在书里夹一片枫叶——你知道什么时候会再翻开。</p>
+      </details>
+      <details>
+        <summary>这个页面会频繁变化吗？</summary>
+        <p>不会。大的调整会提前说明，日常更新仅涉及细微优化。你收藏的链接始终保持稳定，不会突然失效或改头换面。</p>
+      </details>
+      <details>
+        <summary>我该如何持续关注？</summary>
+        <p>最简单的办法：把当前页面加入浏览器书签，或者直接记住 <a href="https://portal--baccarat.com" style="color: #7f644d; text-decoration: underline; text-underline-offset: 2px;">百家乐</a> 的地址。没有邮件列表，没有推送——你主动来，它就在。</p>
+      </details>
+    </div>
+
+    <div class="footer-note">
+      <p>不是每一个页面都需要被记住。但那些你愿意再次打开的，值得一个安静的入口。<br>
+      <span style="display: inline-block; margin-top: 0.3rem;">— 来自一个常被收藏的角落</span></p>
+    </div>
+  </div>
+</body>
+</html>
